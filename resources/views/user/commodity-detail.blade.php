@@ -79,6 +79,7 @@
                             <span class="rounded-full bg-user-dashboard-surface px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-user-dashboard-brand">DATA DEMO</span>
                         </div>
                         <p class="mt-1 text-sm leading-5 text-user-dashboard-secondary">Riwayat dan ilustrasi proyeksi harga {{ strtolower($commodity['name']) }}.</p>
+                    <a class="mt-2 inline-flex text-xs font-semibold text-user-dashboard-brand hover:underline" href="{{ route('user.prediction.explanation', ['code' => $commodity['id']]) }}">Bagaimana akurasi prediksi dijelaskan? <span class="ml-1" aria-hidden="true">→</span></a>
                     </div>
                     @if (count($commodity['forecast']))
                         <div class="inline-flex rounded-xl bg-user-dashboard-surface p-1" role="group" aria-label="Pilih horizon grafik">

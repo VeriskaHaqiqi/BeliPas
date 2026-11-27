@@ -14,6 +14,7 @@
     <x-user.dashboard-header :profile="$profile" :active-nav="$activeNav ?? 'dashboard'" :detail-code="$detailCode ?? 'cabai-rawit-merah'" />
     @yield('content')
     <x-user.logout-confirmation-dialog />
+    <x-user.record-shopping-modal :commodities="$commodities ?? []" />
     <div class="user-dashboard-toast" data-dashboard-toast role="status" aria-live="polite" hidden></div>
 </body>
 </html>

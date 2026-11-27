@@ -16,7 +16,7 @@
             @endif
             <x-user.dashboard-nav-item label="Pusat Rekomendasi Belanja" icon="dashboard-nav-recommendations.svg" route-name="user.recommendations.index" :active="$activeNav === 'recommendations'" />
             <x-user.dashboard-nav-item label="Pengaturan" icon="dashboard-nav-settings.svg" route-name="user.settings.index" :active="$activeNav === 'settings'" />
-            <x-user.dashboard-nav-item label="Bantuan" icon="dashboard-nav-help.svg" />
+            <x-user.dashboard-nav-item label="Bantuan" icon="dashboard-nav-help.svg" route-name="user.prediction.explanation" :route-parameters="['code' => $detailCode]" :active="$activeNav === 'help'" />
         </nav>
 
         <div class="user-dashboard-header-actions relative ml-auto flex shrink-0 items-center gap-2">
@@ -37,6 +37,6 @@
         @endif
         <x-user.dashboard-nav-item class="user-dashboard-mobile-nav-item" label="Pusat Rekomendasi Belanja" icon="dashboard-nav-recommendations.svg" route-name="user.recommendations.index" :active="$activeNav === 'recommendations'" />
         <x-user.dashboard-nav-item class="user-dashboard-mobile-nav-item" label="Pengaturan" icon="dashboard-nav-settings.svg" route-name="user.settings.index" :active="$activeNav === 'settings'" />
-        <x-user.dashboard-nav-item class="user-dashboard-mobile-nav-item" label="Bantuan" icon="dashboard-nav-help.svg" />
+        <x-user.dashboard-nav-item class="user-dashboard-mobile-nav-item" label="Bantuan" icon="dashboard-nav-help.svg" route-name="user.prediction.explanation" :route-parameters="['code' => $detailCode]" :active="$activeNav === 'help'" />
     </nav>
 </header>

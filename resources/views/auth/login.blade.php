@@ -100,9 +100,11 @@
                                 required
                             >
                                 <x-slot:labelAction>
-                                    <button class="user-auth-link text-xs" type="button" data-stage-placeholder="Pemulihan password">
-                                        Lupa password?
-                                    </button>
+                                    @if (app()->environment('local'))
+                                        <a class="user-auth-link text-xs" href="{{ route('password.forgot') }}">Lupa password?</a>
+                                    @else
+                                        <span class="text-xs text-user-text-muted">Lupa password?</span>
+                                    @endif
                                 </x-slot:labelAction>
                                 <x-slot:trailing>
                                     <button

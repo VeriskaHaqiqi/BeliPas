@@ -97,6 +97,7 @@
                     </div>
                 @endif
                 <p class="mt-3 text-[11px] leading-5 text-user-dashboard-secondary">Harga historis ditampilkan dengan garis solid; proyeksi ditampilkan dengan garis putus-putus. Seluruh seri pada halaman ini merupakan fixture demo dan bukan data pasar aktual atau keluaran model produksi.</p>
+                <a class="mt-2 inline-flex text-xs font-semibold text-user-dashboard-brand hover:underline" href="{{ route('user.prediction.explanation', ['code' => $commodity['id']]) }}">Pelajari cara membaca dan mengevaluasi prediksi <span class="ml-1" aria-hidden="true">→</span></a>
             </section>
 
             <section class="user-forecast-table-card overflow-hidden rounded-xl border border-user-dashboard-border bg-white shadow-sm" aria-labelledby="forecast-table-heading">

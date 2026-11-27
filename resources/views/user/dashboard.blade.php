@@ -89,7 +89,7 @@
                                 </span>
                             </div>
                         </div>
-                        <button class="user-dashboard-card-button mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-user-dashboard-brand px-4 text-sm font-medium text-white shadow-sm transition hover:bg-[#003a37] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-user-dashboard-wait-bg focus-visible:ring-offset-2" type="button" data-dashboard-notice="Pencatatan belanja belum tersedia pada MVP v1.">
+                        <button class="user-dashboard-card-button mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-user-dashboard-brand px-4 text-sm font-medium text-white shadow-sm transition hover:bg-[#003a37] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-user-dashboard-wait-bg focus-visible:ring-offset-2" type="button" data-open-record-shopping-dialog aria-haspopup="dialog" aria-controls="user-record-shopping-dialog">
                             <img class="user-dashboard-icon" src="{{ asset('images/dashboard-add-cart.svg') }}" alt="" aria-hidden="true">
                             + Catat Belanja Pagi Ini
                         </button>

@@ -1,8 +1,12 @@
 import './bootstrap';
 import './user-auth.js';
+import './user-recovery.js';
 import './user-dashboard.js';
 import './user-profile-menu.js';
+import './user-prediction.js';
 import './user-detail.js';
 import './user-recommendations.js';
 import './user-settings.js';
 import './user-profile.js';
+import './user-record-shopping.js';
+import './public-landing.js';
