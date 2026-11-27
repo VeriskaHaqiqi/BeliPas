@@ -43,32 +43,6 @@ categoryFilters.forEach((filter) => {
     });
 });
 
-const profileToggle = document.querySelector('[data-user-menu-toggle]');
-const profileMenu = document.querySelector('[data-user-profile-menu]');
-
-const closeProfileMenu = () => {
-    if (!profileToggle || !profileMenu) return;
-
-    profileMenu.hidden = true;
-    profileToggle.setAttribute('aria-expanded', 'false');
-};
-
-profileToggle?.addEventListener('click', () => {
-    const willOpen = profileMenu?.hidden ?? false;
-
-    if (!profileMenu) return;
-
-    profileMenu.hidden = !willOpen;
-    profileToggle.setAttribute('aria-expanded', String(willOpen));
-});
-
-document.addEventListener('click', (event) => {
-    if (profileMenu?.hidden) return;
-    if (event.target instanceof Element && (profileMenu?.contains(event.target) || profileToggle?.contains(event.target))) return;
-
-    closeProfileMenu();
-});
-
 const mobileNavToggle = document.querySelector('[data-mobile-nav-toggle]');
 const mobileNav = document.querySelector('[data-mobile-nav]');
 
@@ -83,7 +57,6 @@ mobileNavToggle?.addEventListener('click', () => {
 document.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
 
-    closeProfileMenu();
     if (mobileNav && mobileNavToggle) {
         mobileNav.hidden = true;
         mobileNavToggle.setAttribute('aria-expanded', 'false');

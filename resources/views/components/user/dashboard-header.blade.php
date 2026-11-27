@@ -20,33 +20,7 @@
         </nav>
 
         <div class="user-dashboard-header-actions relative ml-auto flex shrink-0 items-center gap-2">
-            <button
-                class="user-dashboard-profile-trigger flex min-h-11 items-center gap-2 rounded-xl px-2.5 py-1.5 text-left transition hover:bg-user-dashboard-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-user-dashboard-brand"
-                type="button"
-                data-user-menu-toggle
-                aria-controls="user-profile-menu"
-                aria-expanded="false"
-            >
-                <span class="hidden min-w-0 text-right sm:block">
-                    <span class="block truncate text-sm font-bold leading-[17.5px] text-user-dashboard-text" data-profile-value="business_name">{{ $profile['business_name'] }}</span>
-                    <span class="block truncate text-xs leading-4 text-user-dashboard-secondary">{{ $profile['business_type'] }}</span>
-                </span>
-                <img class="size-8 rounded-full border border-user-dashboard-border object-cover" src="{{ asset('images/dashboard-profile.png') }}" width="32" height="32" alt="" aria-hidden="true">
-                <img class="user-dashboard-chevron" src="{{ asset('images/dashboard-profile-chevron.svg') }}" alt="" aria-hidden="true">
-                <span class="sr-only">Buka menu {{ $profile['business_name'] }}</span>
-            </button>
-
-            <div id="user-profile-menu" class="user-dashboard-popover absolute right-0 top-[calc(100%+8px)] z-50 w-64 rounded-xl border border-user-dashboard-border bg-white p-2 shadow-xl" data-user-profile-menu hidden>
-                <p class="px-3 pb-2 pt-2 text-xs font-semibold uppercase tracking-wide text-user-dashboard-secondary">Pratinjau profil</p>
-                <div class="border-b border-user-dashboard-border px-3 pb-3">
-                    <p class="text-sm font-semibold text-user-dashboard-text" data-profile-value="business_name">{{ $profile['business_name'] }}</p>
-                    <p class="mt-0.5 text-xs text-user-dashboard-secondary"><span data-profile-value="owner_name">{{ $profile['owner_name'] }}</span> · {{ $profile['business_type'] }}</p>
-                </div>
-                <a class="user-dashboard-popover-action mt-2" href="{{ route('user.profile.show') }}">
-                    Profil Saya <span>Lihat &amp; edit</span>
-                </a>
-                <p class="px-3 pb-2 pt-2 text-[11px] leading-4 text-user-dashboard-secondary">Data akun ini hanya contoh tampilan, belum terhubung ke autentikasi.</p>
-            </div>
+            <x-user.profile-dropdown :profile="$profile" />
 
             <button class="user-dashboard-mobile-nav-toggle rounded-lg border border-user-dashboard-border px-3 py-2 text-sm font-semibold text-user-dashboard-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-user-dashboard-brand" type="button" data-mobile-nav-toggle aria-controls="user-mobile-nav" aria-expanded="false">
                 Menu

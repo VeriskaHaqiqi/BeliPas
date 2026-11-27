@@ -180,6 +180,247 @@
     @apply text-[10px] font-medium text-user-dashboard-secondary;
 }
 
+.user-profile-menu-root { position: relative; }
+
+.user-profile-dropdown {
+    border-color: rgba(224, 227, 225, .9);
+    box-shadow: 0 16px 36px -6px rgba(11, 83, 69, .18);
+}
+
+.user-profile-dropdown[hidden] { display: none; }
+
+.user-profile-dropdown-identity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    padding: 8px;
+}
+
+.user-profile-dropdown-avatar {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 50%;
+    background: #003a2f;
+    color: #fff;
+    font-family: var(--font-user-display);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.user-profile-dropdown-copy {
+    display: grid;
+    min-width: 0;
+    gap: 1px;
+}
+
+.user-profile-dropdown-copy strong,
+.user-profile-dropdown-copy > span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.user-profile-dropdown-copy strong {
+    color: #181c1b;
+    font-family: var(--font-user-display);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.user-profile-dropdown-copy > span {
+    color: #3f4945;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.user-profile-dropdown-divider {
+    height: 1px;
+    margin: 4px 0;
+    background: #e0e3e1;
+}
+
+.user-profile-dropdown-nav {
+    display: grid;
+    gap: 2px;
+}
+
+.user-dashboard-popover-action.user-profile-dropdown-item {
+    display: flex;
+    min-height: 38px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 10px 8px;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    cursor: pointer;
+    font-family: var(--font-user-sans);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 18px;
+    text-decoration: none;
+}
+
+.user-dashboard-popover-action.user-profile-dropdown-item:hover { background: #f1f4f2; }
+
+.user-dashboard-popover-action.user-profile-dropdown-item.is-danger { color: #ba1a1a; }
+.user-dashboard-popover-action.user-profile-dropdown-item.is-danger:hover { background: #fef2f2; }
+
+.user-dashboard-popover-action.user-profile-dropdown-item .user-profile-dropdown-label {
+    color: inherit;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.user-profile-menu-icon,
+.user-logout-icon {
+    display: block;
+    width: auto;
+    height: auto;
+    flex: 0 0 auto;
+}
+
+.user-dashboard-popover-action.user-profile-dropdown-item:focus-visible,
+.user-logout-dialog button:focus-visible {
+    outline: 2px solid #006b5e;
+    outline-offset: 2px;
+}
+
+.user-logout-dialog {
+    width: min(480px, calc(100vw - 32px));
+    max-width: 480px;
+    max-height: calc(100dvh - 32px);
+    margin: auto;
+    overflow: visible;
+    padding: 0;
+    border: 0;
+    border-radius: 16px;
+    background: transparent;
+    color: #0f172a;
+}
+
+.user-logout-dialog::backdrop {
+    background: rgba(0, 0, 0, .6);
+    backdrop-filter: blur(4px);
+}
+
+.user-logout-dialog-card {
+    width: 100%;
+    padding: 24px;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, .25);
+}
+
+.user-logout-dialog-top-row {
+    display: flex;
+    justify-content: flex-end;
+    margin: -6px -6px 6px 0;
+}
+
+.user-logout-dialog-close {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+}
+
+.user-logout-dialog-close:hover { background: #f1f4f2; }
+
+.user-logout-dialog-content { display: grid; justify-items: start; }
+
+.user-logout-icon-tile {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    place-items: center;
+    border-radius: 12px;
+    background: #fef2f2;
+}
+
+.user-logout-dialog-content h2 {
+    margin: 0;
+    color: #0f172a;
+    font-family: var(--font-user-sans);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.5px;
+    line-height: 28px;
+}
+
+.user-logout-dialog-content > p {
+    margin: 4px 0 0;
+    color: #475569;
+    font-size: 14px;
+    line-height: 23px;
+}
+
+.user-logout-dialog-content > .user-logout-demo-note {
+    margin-top: 6px;
+    color: #707975;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.user-logout-dialog-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.user-logout-dialog-actions button {
+    min-height: 40px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.user-logout-cancel {
+    border: 1px solid #065f5b;
+    background: #fff;
+    color: #065f5b;
+}
+
+.user-logout-cancel:hover { background: #f0f8f6; }
+
+.user-logout-confirm {
+    border: 1px solid #dc2626;
+    background: #dc2626;
+    color: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.user-logout-confirm:disabled {
+    cursor: not-allowed;
+    opacity: .55;
+}
+
+@media (max-width: 639px) {
+    .user-profile-dropdown { max-width: calc(100vw - 24px); }
+    .user-logout-dialog-card { padding: 20px; }
+    .user-logout-dialog-content > p { font-size: 13px; }
+    .user-logout-dialog-actions { gap: 8px; }
+    .user-logout-dialog-actions button { padding-inline: 16px; }
+}
+
 .user-dashboard-mobile-nav-toggle,
 .user-dashboard-mobile-nav {
     display: none;
