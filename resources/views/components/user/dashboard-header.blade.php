@@ -9,11 +9,7 @@
 
         <nav class="user-dashboard-desktop-nav flex h-full items-center gap-6" aria-label="Navigasi utama">
             <x-user.dashboard-nav-item label="Beranda" icon="dashboard-nav-home.svg" route-name="user.dashboard" :active="$activeNav === 'dashboard'" />
-            @if ($activeNav === 'commodities')
-                <x-user.dashboard-nav-item label="Komoditas" icon="dashboard-nav-commodities.svg" route-name="user.commodities.show" :route-parameters="['code' => $detailCode]" active />
-            @else
-                <x-user.dashboard-nav-item label="Komoditas" icon="dashboard-nav-commodities.svg" />
-            @endif
+            <x-user.dashboard-nav-item label="Komoditas" icon="dashboard-nav-commodities.svg" route-name="user.commodities.show" :route-parameters="['code' => $detailCode]" :active="$activeNav === 'commodities'" />
             <x-user.dashboard-nav-item label="Pusat Rekomendasi Belanja" icon="dashboard-nav-recommendations.svg" route-name="user.recommendations.index" :active="$activeNav === 'recommendations'" />
             <x-user.dashboard-nav-item label="Pengaturan" icon="dashboard-nav-settings.svg" route-name="user.settings.index" :active="$activeNav === 'settings'" />
             <x-user.dashboard-nav-item label="Bantuan" icon="dashboard-nav-help.svg" route-name="user.prediction.explanation" :route-parameters="['code' => $detailCode]" :active="$activeNav === 'help'" />
@@ -30,11 +26,7 @@
 
     <nav id="user-mobile-nav" class="user-dashboard-mobile-nav absolute inset-x-0 top-16 z-40 border-b border-user-dashboard-border bg-white px-4 pb-3 shadow-lg sm:px-6" aria-label="Navigasi utama" data-mobile-nav hidden>
         <x-user.dashboard-nav-item class="user-dashboard-mobile-nav-item" label="Beranda" icon="dashboard-nav-home.svg" route-name="user.dashboard" :active="$activeNav === 'dashboard'" />
-        @if ($activeNav === 'commodities')
-            <x-user.dashboard-nav-item class="user-dashboard-mobile-nav-item" label="Komoditas" icon="dashboard-nav-commodities.svg" route-name="user.commodities.show" :route-parameters="['code' => $detailCode]" active />
-        @else
-            <x-user.dashboard-nav-item class="user-dashboard-mobile-nav-item" label="Komoditas" icon="dashboard-nav-commodities.svg" />
-        @endif
+        <x-user.dashboard-nav-item class="user-dashboard-mobile-nav-item" label="Komoditas" icon="dashboard-nav-commodities.svg" route-name="user.commodities.show" :route-parameters="['code' => $detailCode]" :active="$activeNav === 'commodities'" />
         <x-user.dashboard-nav-item class="user-dashboard-mobile-nav-item" label="Pusat Rekomendasi Belanja" icon="dashboard-nav-recommendations.svg" route-name="user.recommendations.index" :active="$activeNav === 'recommendations'" />
         <x-user.dashboard-nav-item class="user-dashboard-mobile-nav-item" label="Pengaturan" icon="dashboard-nav-settings.svg" route-name="user.settings.index" :active="$activeNav === 'settings'" />
         <x-user.dashboard-nav-item class="user-dashboard-mobile-nav-item" label="Bantuan" icon="dashboard-nav-help.svg" route-name="user.prediction.explanation" :route-parameters="['code' => $detailCode]" :active="$activeNav === 'help'" />

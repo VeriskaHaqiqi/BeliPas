@@ -1692,7 +1692,8 @@
 }
 
 .user-profile-main {
-    overflow: visible;
+    overflow-x: clip;
+    overflow-y: visible;
     background: #f7faf8;
 }
 
