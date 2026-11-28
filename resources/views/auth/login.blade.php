@@ -71,21 +71,24 @@
                         <p class="mt-1.5 text-sm leading-5 text-user-text-secondary">Masukkan email atau nomor HP yang terdaftar</p>
                     </header>
 
-                    <form class="mt-8" data-login-form novalidate>
+                    <form class="mt-8" method="POST" action="{{ route('login.store') }}" data-login-form novalidate>
+                        @csrf
                         <div class="grid gap-4">
                             <x-user.input-field
                                 id="identity"
                                 name="identity"
-                                label="Email atau Nomor HP"
-                                placeholder="contoh: 08123456789 atau nama@warung.com"
+                                type="email"
+                                label="Email"
+                                placeholder="contoh: nama@warung.com"
                                 autocomplete="username"
                                 icon="identity-icon.svg"
+                                :value="old('identity')"
                                 required
                             />
 
                             <p class="-mt-2 flex items-center gap-1.5 text-[11px] leading-4 text-user-text-muted">
                                 <span aria-hidden="true" class="flex size-3 items-center justify-center rounded-full border border-user-accent text-[8px] font-bold text-user-accent">i</span>
-                                Bisa menggunakan nomor WhatsApp aktif
+                                Masuk menggunakan alamat email akun terdaftar
                             </p>
 
                             <x-user.input-field
@@ -122,7 +125,7 @@
                         </div>
 
                         <label for="remember" class="mt-5 flex min-h-6 cursor-pointer items-center gap-3 text-sm text-user-text">
-                            <input id="remember" name="remember" type="checkbox" class="user-auth-checkbox size-4 rounded border-user-border focus:ring-user-accent">
+                            <input id="remember" name="remember" type="checkbox" value="1" @checked(old('remember')) class="user-auth-checkbox size-4 rounded border-user-border focus:ring-user-accent">
                             <span>Ingat saya di perangkat ini</span>
                         </label>
 
@@ -133,7 +136,17 @@
                             </x-user.primary-button>
                         </div>
 
-                        <p class="mt-4 rounded-xl border border-user-border bg-user-surface-soft px-4 py-3 text-sm leading-5 text-user-text-secondary" data-login-status role="status" aria-live="polite" hidden></p>
+                        @if ($errors->any())
+                            <p class="mt-4 rounded-xl border border-[#f5c2c7] bg-[#fff5f5] px-4 py-3 text-sm leading-5 text-[#9f1239]" data-login-status role="alert">
+                                {{ $errors->first() }}
+                            </p>
+                        @elseif (session('status'))
+                            <p class="mt-4 rounded-xl border border-user-border bg-user-surface-soft px-4 py-3 text-sm leading-5 text-user-text-secondary" data-login-status role="status" aria-live="polite">
+                                {{ session('status') }}
+                            </p>
+                        @else
+                            <p class="mt-4 rounded-xl border border-user-border bg-user-surface-soft px-4 py-3 text-sm leading-5 text-user-text-secondary" data-login-status role="status" aria-live="polite" hidden></p>
+                        @endif
                     </form>
 
                     <div class="mt-6 border-t border-user-border pt-6 text-center text-sm text-user-text-secondary">

@@ -3,7 +3,15 @@
 @section('title', 'Pengaturan Akun & Preferensi')
 
 @section('content')
-    <main class="user-dashboard-main user-settings-main" data-user-settings data-initial-tracked='@json($initialTrackedIds)'>
+    <main
+        class="user-dashboard-main user-settings-main"
+        data-user-settings
+        data-initial-tracked='@json($initialTrackedIds)'
+        @if ($watchlistPersisted ?? false)
+            data-watchlist-endpoint="{{ route('user.settings.watchlist.update') }}"
+            data-watchlist-csrf="{{ csrf_token() }}"
+        @endif
+    >
         <div class="user-settings-container mx-auto flex w-full max-w-[1024px] flex-col gap-6 px-8 py-10">
             <section class="flex flex-col gap-2" aria-labelledby="settings-heading">
                 <div class="flex items-center gap-2 text-sm leading-5 text-user-dashboard-secondary">
@@ -17,17 +25,19 @@
                         <h1 id="settings-heading" class="font-user-display text-[32px] font-bold leading-10 tracking-[-.025em] text-user-dashboard-text">Pengaturan Akun &amp; Preferensi</h1>
                         <p class="mt-1 text-base leading-6 text-user-dashboard-secondary">Kelola profil usaha kuliner, komoditas pantauan, ambang batas peringatan, dan notifikasi.</p>
                     </div>
-                    <span class="user-settings-demo-pill"><i aria-hidden="true"></i>Pratinjau akun: <strong>{{ $profile['business_name'] }}</strong> · DATA DEMO</span>
+                    <span class="user-settings-demo-pill"><i aria-hidden="true"></i>{{ ($profile['is_authenticated'] ?? false) ? 'Akun:' : 'Pratinjau akun:' }} <strong>{{ $profile['business_name'] }}</strong>@if (! ($profile['is_authenticated'] ?? false)) · DATA DEMO @endif</span>
                 </div>
             </section>
 
-            <div class="user-settings-notice" role="status" aria-live="polite">
-                <span class="user-settings-notice-icon"><img class="settings-asset" src="{{ asset('images/settings-status-info.svg') }}" alt="" aria-hidden="true"></span>
-                <div>
-                    <strong>Penyimpanan preferensi belum tersedia</strong>
-                    <p>Pilihan komoditas di halaman ini hanya berlaku sementara dan belum disimpan ke Supabase.</p>
+            @if (! ($watchlistPersisted ?? false))
+                <div class="user-settings-notice" role="status" aria-live="polite">
+                    <span class="user-settings-notice-icon"><img class="settings-asset" src="{{ asset('images/settings-status-info.svg') }}" alt="" aria-hidden="true"></span>
+                    <div>
+                        <strong>Penyimpanan preferensi belum tersedia</strong>
+                        <p>Tabel komoditas pantauan belum tersedia pada database aktif. Perubahan hanya berlaku sementara.</p>
+                    </div>
                 </div>
-            </div>
+            @endif
 
             <form class="user-settings-form" data-settings-form aria-label="Pengaturan preferensi demo">
                 <section class="user-settings-section user-settings-tracked" aria-labelledby="tracked-heading">
@@ -46,6 +56,7 @@
                                 data-watch-chip="{{ $commodity['id'] }}"
                                 aria-label="Hapus {{ $commodity['name'] }} dari daftar pantauan"
                                 aria-pressed="true"
+                                @if (! in_array($commodity['id'], $initialTrackedIds, true)) hidden @endif
                             >
                                 <img class="settings-asset" src="{{ asset('images/settings-chip-check.svg') }}" alt="" aria-hidden="true">
                                 <span>{{ $commodity['name'] }}</span>

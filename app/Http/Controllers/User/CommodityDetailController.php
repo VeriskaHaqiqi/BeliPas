@@ -2,27 +2,26 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Data\UserDashboardDemoData;
 use App\Http\Controllers\Controller;
+use App\Services\UserMarketDataService;
+use App\Services\UserProfilePresenter;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 final class CommodityDetailController extends Controller
 {
-    public function __invoke(string $code): View
+    public function __invoke(Request $request, string $code): View
     {
-        $commodity = UserDashboardDemoData::detail($code);
+        $commodity = UserMarketDataService::detail($code);
 
         abort_unless($commodity, 404);
 
         return view('user.commodity-detail', [
-            'profile' => UserDashboardDemoData::dashboard()['profile'],
+            'profile' => UserProfilePresenter::forUser($request->user()),
             'commodity' => $commodity,
             'activeNav' => 'commodities',
             'detailCode' => $code,
-            'relatedCommodities' => array_values(array_filter(
-                UserDashboardDemoData::commodities(),
-                fn (array $item): bool => $item['id'] !== $code,
-            )),
+            'relatedCommodities' => UserMarketDataService::related($code),
         ]);
     }
 }

@@ -26,7 +26,7 @@
                 </div>
                 <p class="flex items-center gap-1.5">
                     <img class="user-dashboard-icon" src="{{ asset('images/dashboard-update.svg') }}" alt="" aria-hidden="true">
-                    <span><strong class="font-semibold text-user-dashboard-brand">DATA DEMO</strong> · {{ $commodity['updated_at_label'] }}</span>
+                    <span><strong class="font-semibold text-user-dashboard-brand">{{ ($commodity['data_source'] ?? 'demo') === 'database' ? 'DATA AKTUAL' : 'DATA DEMO' }}</strong> · {{ $commodity['updated_at_label'] }}</span>
                 </p>
             </div>
 
@@ -46,8 +46,12 @@
                     </div>
                 </div>
                 <div class="user-detail-current-price rounded-2xl border border-user-dashboard-border bg-white px-5 py-4 shadow-sm">
-                    <p class="text-xs font-medium text-user-dashboard-secondary">Harga terkini <span class="text-[10px] font-bold uppercase tracking-wide text-user-dashboard-brand">· DATA DEMO</span></p>
-                    <p class="mt-1 font-user-display text-[34px] font-bold leading-10 tracking-[-.025em] text-user-dashboard-text">Rp{{ $commodity['price'] }}<span class="ml-1 text-sm font-medium tracking-normal text-user-dashboard-secondary">/{{ $commodity['unit'] }}</span></p>
+                    <p class="text-xs font-medium text-user-dashboard-secondary">Harga terkini <span class="text-[10px] font-bold uppercase tracking-wide text-user-dashboard-brand">· {{ ($commodity['data_source'] ?? 'demo') === 'database' ? 'DATA AKTUAL' : 'DATA DEMO' }}</span></p>
+                    @if ($commodity['price'] !== null)
+                        <p class="mt-1 font-user-display text-[34px] font-bold leading-10 tracking-[-.025em] text-user-dashboard-text">Rp{{ $commodity['price'] }}<span class="ml-1 text-sm font-medium tracking-normal text-user-dashboard-secondary">/{{ $commodity['unit'] }}</span></p>
+                    @else
+                        <p class="mt-1 font-user-display text-2xl font-bold leading-9 text-user-dashboard-secondary">Belum tersedia</p>
+                    @endif
                     <p class="mt-1 flex items-center gap-1.5 text-xs font-semibold {{ $commodity['delta_tone'] === 'wait' ? 'text-user-dashboard-brand-light' : ($commodity['delta_tone'] === 'buy' ? 'text-user-dashboard-buy-dot' : 'text-user-dashboard-monitor-dot') }}">
                         <img class="user-dashboard-icon" src="{{ asset('images/'.$commodity['delta_icon']) }}" alt="" aria-hidden="true">{{ $commodity['delta'] }}
                     </p>
@@ -112,7 +116,9 @@
                             <h2 id="forecast-heading" class="font-user-display text-lg font-bold leading-6 text-user-dashboard-text">Proyeksi Rinci Harga</h2>
                             <span class="rounded-full bg-user-dashboard-surface px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-user-dashboard-brand">DATA DEMO</span>
                         </div>
-                        <p class="mt-1 text-xs leading-4 text-user-dashboard-secondary">Ilustrasi perubahan harga terhadap harga demo hari ini Rp{{ $commodity['price'] }}/{{ $commodity['unit'] }}.</p>
+                        <p class="mt-1 text-xs leading-4 text-user-dashboard-secondary">
+                            {{ $commodity['price'] !== null ? 'Ilustrasi perubahan harga terhadap harga hari ini Rp'.$commodity['price'].'/'.$commodity['unit'].'.' : 'Menunggu data harga dan prakiraan 1–7 hari.' }}
+                        </p>
                     </div>
                     <p class="text-xs leading-4 text-user-dashboard-secondary">Diperbarui: {{ $commodity['updated_at_label'] }}</p>
                 </div>
@@ -157,7 +163,7 @@
                                 <x-user.signal-badge :signal="$related['signal']" />
                             </div>
                             <p class="mt-4 font-user-display text-sm font-bold text-user-dashboard-text">{{ $related['name'] }}</p>
-                            <p class="mt-1 text-xs text-user-dashboard-secondary">Rp{{ $related['price'] }}/{{ $related['unit'] }}</p>
+                            <p class="mt-1 text-xs text-user-dashboard-secondary">{{ $related['price'] !== null ? 'Rp'.$related['price'].'/'.$related['unit'] : 'Harga belum tersedia' }}</p>
                             <p class="mt-3 border-t border-user-dashboard-border pt-3 text-[11px] text-user-dashboard-secondary">{{ $related['delta'] }}</p>
                         </a>
                     @endforeach

@@ -21,7 +21,11 @@
                     </p>
                     <p class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs leading-4 text-user-dashboard-secondary">
                         <img class="user-dashboard-icon" src="{{ asset('images/dashboard-update.svg') }}" alt="" aria-hidden="true">
-                        <span><strong class="font-semibold text-user-dashboard-brand">DATA DEMO</strong> · waktu contoh {{ $updated_at_label }} dari {{ $updated_sources_label }}</span>
+                        @if (($data_source ?? 'demo') === 'database')
+                            <span><strong class="font-semibold text-user-dashboard-brand">DATA AKTUAL</strong> · diperbarui {{ $updated_at_label }} ({{ $updated_sources_label }})</span>
+                        @else
+                            <span><strong class="font-semibold text-user-dashboard-brand">DATA DEMO</strong> · waktu contoh {{ $updated_at_label }} dari {{ $updated_sources_label }}</span>
+                        @endif
                     </p>
                 </div>
 
