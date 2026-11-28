@@ -41,11 +41,13 @@ return new class extends Migration
                 'price_records_market_date_idx'
             );
         });
-        DB::statement(
-            'ALTER TABLE price_records
-            ADD CONSTRAINT price_records_price_positive
-            CHECK (price > 0)'
-        );
+        if (DB::connection()->getDriverName() === 'pgsql') {
+            DB::statement(
+                'ALTER TABLE price_records
+                ADD CONSTRAINT price_records_price_positive
+                CHECK (price > 0)'
+            );
+        }
     }
 
     public function down(): void

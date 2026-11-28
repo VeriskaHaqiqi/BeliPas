@@ -31,6 +31,7 @@ Route::get('/verify-code', [PasswordRecoveryPreviewController::class, 'verify'])
 Route::get('/reset-password', [PasswordRecoveryPreviewController::class, 'reset'])->name('password.reset');
 Route::get('/password-updated', [PasswordRecoveryPreviewController::class, 'updated'])->name('password.updated');
 
+
 Route::middleware(['auth', 'active', 'role:user'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('user.dashboard');
     Route::get('/komoditas/{code}', CommodityDetailController::class)->name('user.commodities.show');
@@ -41,3 +42,6 @@ Route::middleware(['auth', 'active', 'role:user'])->group(function () {
     Route::get('/profil', ProfileController::class)->name('user.profile.show');
     Route::get('/bantuan/prediksi/{code?}', PredictionExplanationController::class)->name('user.prediction.explanation');
 });
+
+require __DIR__.'/admin.php';
+
