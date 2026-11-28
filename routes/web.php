@@ -27,3 +27,5 @@ Route::get('/rekomendasi', RecommendationCenterController::class)->name('user.re
 Route::get('/pengaturan', SettingsController::class)->name('user.settings.index');
 Route::get('/profil', ProfileController::class)->name('user.profile.show');
 Route::get('/bantuan/prediksi/{code?}', PredictionExplanationController::class)->name('user.prediction.explanation');
+
+require __DIR__.'/admin.php';
