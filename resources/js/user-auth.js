@@ -28,8 +28,10 @@ const showStatus = (form, message) => {
 const loginForm = document.querySelector('[data-login-form]');
 
 loginForm?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    showStatus(loginForm, 'Autentikasi belum dihubungkan. Form ini hanya pratinjau antarmuka.');
+    if (!loginForm.reportValidity()) {
+        event.preventDefault();
+        showStatus(loginForm, 'Periksa kembali email dan password Anda.');
+    }
 });
 
 const registerForm = document.querySelector('[data-register-form]');
@@ -67,15 +69,12 @@ registerPassword?.addEventListener('input', updateRegistrationPasswordState);
 registerPasswordConfirmation?.addEventListener('input', updateRegistrationPasswordState);
 
 registerForm?.addEventListener('submit', (event) => {
-    event.preventDefault();
     updateRegistrationPasswordState();
 
     if (!registerForm.reportValidity()) {
+        event.preventDefault();
         showStatus(registerForm, 'Periksa kembali data yang wajib diisi dan ketentuan password.');
-        return;
     }
-
-    showStatus(registerForm, 'Pendaftaran belum disimpan. Form ini belum terhubung ke Supabase.');
 });
 
 document.querySelectorAll('[data-stage-placeholder]').forEach((control) => {

@@ -56,7 +56,7 @@
                     </p>
                 </header>
 
-                <form class="mt-7 grid gap-4" data-register-form novalidate>
+                <form class="mt-7 grid gap-4" method="POST" action="{{ route('register.store') }}" data-register-form novalidate>
                     @csrf
 
                     <x-user.input-field
@@ -66,6 +66,7 @@
                         placeholder="contoh: Warung Bu Rina"
                         autocomplete="organization"
                         icon="business-icon.svg"
+                        :value="old('business_name')"
                         required
                     />
 
@@ -76,6 +77,7 @@
                         placeholder="contoh: Ibu Rina Suryani"
                         autocomplete="name"
                         icon="identity-icon.svg"
+                        :value="old('owner_name')"
                         required
                     />
 
@@ -83,15 +85,17 @@
                         <x-user.input-field
                             id="register-identity"
                             name="identity"
-                            label="Email atau Nomor HP"
-                            placeholder="contoh: 08123456789 atau rina@warung.com"
+                            type="email"
+                            label="Email"
+                            placeholder="contoh: rina@warung.com"
                             autocomplete="username"
                             icon="contact-icon.svg"
+                            :value="old('identity')"
                             required
                         />
                         <p class="flex items-center gap-1.5 pl-1 text-[11px] leading-4 text-user-accent">
                             <span aria-hidden="true" class="flex size-3 items-center justify-center rounded-full border border-current text-[8px] font-bold">✓</span>
-                            Gunakan nomor WhatsApp aktif
+                            Gunakan alamat email aktif untuk masuk ke akun
                         </p>
                     </div>
 
@@ -173,17 +177,18 @@
                         <img src="{{ asset('images/primary-arrow.svg') }}" alt="" aria-hidden="true">
                     </x-user.primary-button>
 
-                    <p class="rounded-xl bg-user-surface-soft px-4 py-3 text-center text-[11px] leading-4 text-user-text-secondary" data-auth-status role="status" aria-live="polite" hidden></p>
+                    @if ($errors->any())
+                        <p class="rounded-xl border border-[#f5c2c7] bg-[#fff5f5] px-4 py-3 text-center text-[11px] leading-4 text-[#9f1239]" data-auth-status role="alert">
+                            {{ $errors->first() }}
+                        </p>
+                    @else
+                        <p class="rounded-xl bg-user-surface-soft px-4 py-3 text-center text-[11px] leading-4 text-user-text-secondary" data-auth-status role="status" aria-live="polite" hidden></p>
+                    @endif
                 </form>
 
                 <p class="mt-5 text-center text-xs text-user-text-secondary">
                     Sudah punya akun?
                     <a class="user-auth-link ml-1 text-xs" href="{{ route('login') }}">Masuk</a>
-                </p>
-
-                <p class="mt-4 flex items-center justify-center gap-2 rounded-lg bg-user-surface-soft px-3 py-2.5 text-[11px] leading-4 text-user-text-secondary">
-                    <span aria-hidden="true" class="flex size-3.5 items-center justify-center rounded-full border border-user-accent text-[9px] font-bold text-user-accent">i</span>
-                    Pendaftaran belum terhubung dan tidak menyimpan data.
                 </p>
             </section>
         </div>

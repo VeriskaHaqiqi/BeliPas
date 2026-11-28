@@ -49,8 +49,12 @@
     </p>
 
     <div class="mt-2 flex items-baseline gap-1.5 pl-1">
-        <span class="font-user-display text-[40px] font-bold leading-[48px] tracking-[-.02em] text-user-dashboard-text">Rp{{ $commodity['price'] }}</span>
-        <span class="text-sm font-medium leading-5 text-user-dashboard-secondary">/{{ $commodity['unit'] }}</span>
+        @if ($commodity['price'] !== null)
+            <span class="font-user-display text-[40px] font-bold leading-[48px] tracking-[-.02em] text-user-dashboard-text">Rp{{ $commodity['price'] }}</span>
+            <span class="text-sm font-medium leading-5 text-user-dashboard-secondary">/{{ $commodity['unit'] }}</span>
+        @else
+            <span class="font-user-display text-2xl font-bold leading-9 text-user-dashboard-secondary">Harga belum tersedia</span>
+        @endif
     </div>
 
     <p class="mt-0.5 flex items-center gap-1 pl-1 text-[13px] font-medium leading-5 {{ $textTone }}">

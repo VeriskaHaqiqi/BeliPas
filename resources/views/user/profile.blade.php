@@ -21,10 +21,12 @@
                 </button>
             </section>
 
-            <div class="user-profile-demo-note" role="note">
-                <span class="user-profile-demo-dot" aria-hidden="true"></span>
-                <span><strong>DATA DEMO</strong> — informasi akun dan usaha pada halaman ini hanya contoh tampilan.</span>
-            </div>
+            @if (! ($profile['is_authenticated'] ?? false))
+                <div class="user-profile-demo-note" role="note">
+                    <span class="user-profile-demo-dot" aria-hidden="true"></span>
+                    <span><strong>DATA DEMO</strong> — informasi akun dan usaha pada halaman ini hanya contoh tampilan.</span>
+                </div>
+            @endif
 
             <div class="user-profile-grid">
                 <form class="user-profile-card user-profile-business-card" data-profile-edit-form aria-label="Informasi profil usaha" novalidate>
@@ -37,10 +39,12 @@
                             <div class="user-profile-identity-copy">
                                 <div class="user-profile-name-line">
                                     <h2 data-profile-value="business_name">{{ $profile['business_name'] }}</h2>
-                                    <span class="user-profile-demo-badge">DEMO</span>
+                                    @if (! ($profile['is_authenticated'] ?? false))
+                                        <span class="user-profile-demo-badge">DEMO</span>
+                                    @endif
                                 </div>
                                 <p>Pemilik: <span data-profile-value="owner_name">{{ $profile['owner_name'] }}</span></p>
-                                <span class="user-profile-date">Contoh terdaftar sejak: {{ $profile['registered_at_label'] }}</span>
+                                <span class="user-profile-date">Terdaftar sejak: {{ $profile['registered_at_label'] }}</span>
                             </div>
                         </div>
                         <div class="user-profile-business-type">

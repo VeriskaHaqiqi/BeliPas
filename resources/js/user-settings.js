@@ -96,8 +96,30 @@ if (settingsRoot) {
         announce('Pilihan komoditas dikembalikan ke standar demo. Belum ada data yang disimpan.');
     });
 
-    settingsRoot.querySelector('[data-preview-save]')?.addEventListener('click', () => {
-        announce('Pratinjau pilihan diperbarui di halaman ini. Penyimpanan ke database belum tersedia.');
+    settingsRoot.querySelector('[data-preview-save]')?.addEventListener('click', async () => {
+        const endpoint = settingsRoot.dataset.watchlistEndpoint;
+        const csrf = settingsRoot.dataset.watchlistCsrf;
+
+        if (!endpoint || !csrf) {
+            announce('Pratinjau pilihan diperbarui di halaman ini. Penyimpanan ke database belum tersedia.');
+            return;
+        }
+
+        try {
+            const response = await fetch(endpoint, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'X-CSRF-TOKEN': csrf,
+                },
+                body: JSON.stringify({ commodity_codes: [...trackedIds] }),
+            });
+            const payload = await response.json().catch(() => ({}));
+            announce(payload.message ?? (response.ok ? 'Daftar komoditas pantauan berhasil diperbarui.' : 'Gagal menyimpan komoditas pantauan.'));
+        } catch {
+            announce('Terjadi kesalahan jaringan saat menyimpan komoditas pantauan.');
+        }
     });
 
     settingsRoot.querySelector('[data-settings-support]')?.addEventListener('click', () => {

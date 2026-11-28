@@ -11,13 +11,15 @@
                 <img class="user-logout-icon" src="{{ asset('images/user-modal-logout.svg') }}" alt="">
             </span>
             <h2 id="user-logout-title">Keluar dari BeliPas?</h2>
-            <p id="user-logout-description">Fungsi keluar belum tersedia karena autentikasi belum terhubung.</p>
-            <p class="user-logout-demo-note" role="note">Akun yang tampil saat ini adalah data demo; tidak ada sesi autentikasi yang diakhiri.</p>
+            <p id="user-logout-description">Anda akan keluar dari sesi akun saat ini dan diarahkan kembali ke halaman masuk.</p>
         </div>
 
         <div class="user-logout-dialog-actions">
             <button class="user-logout-cancel" type="button" data-close-logout-dialog>Batal</button>
-            <button class="user-logout-confirm" type="button" disabled aria-describedby="user-logout-description">Ya, Keluar</button>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button class="user-logout-confirm" type="submit">Ya, Keluar</button>
+            </form>
         </div>
     </div>
 </dialog>
